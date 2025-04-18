@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bot Discord Bengkel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .image-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.preview-img {
+  max-width: 100%;
+  width: 300px; /* atau 100% biar adaptif */
+  height: auto;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.preview-img:hover {
+  transform: scale(1.03);
+}
+
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #FFD700;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #e6c200;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="image-group">
+      <a href="vorder.png" target="_blank">
+        <img src="vorder.png" alt="Bot Bengkel Preview" class="preview-img">
+      </a>
+      <a href="zorder.png" target="_blank">
+        <img src="zorder.png" alt="Bot Bengkel Preview" class="preview-img">
+      </a>
+    </div>
+  
+    <h1>Bot OrderL</h1>
+  
+    <p>WS Order Bot adalah bot Discord yang saya rancang khusus untuk komunitas bisnis Workshop (WS), terutama yang berbasis roleplay seperti di platform SAMP (San Andreas Multiplayer). Tujuan utama dari bot ini adalah menyederhanakan sistem pemesanan jasa secara otomatis, langsung dari Discord, tanpa perlu interaksi manual atau peran admin dalam setiap langkahnya.
+
+      Di komunitas yang aktif dan dinamis, setiap detik sangat berarti. Sistem lama yang mengandalkan chat manual untuk memesan jasa seringkali membingungkan, lambat, dan rawan kesalahan. WS Order Bot hadir sebagai solusi untuk menghapus semua kerumitan itu. Dengan hanya beberapa klik di dalam embed Discord, pelanggan bisa memesan layanan, memilih jenis pekerjaan, dan langsung terhubung dengan mekanik yang bertugas, semua secara otomatis dan real-time.
+      
+      Yang membuat bot ini begitu dibutuhkan bukan hanya karena efisiensinya, tapi juga karena ia mengangkat standar pelayanan dalam komunitas. Sistem ini memberikan pengalaman yang profesional, rapi, dan mudah dipahami oleh siapa saja, bahkan oleh member baru sekalipun. Bot ini mengatur channel pesanan secara otomatis, mengatur jadwal pengerjaan berdasarkan estimasi mekanik, bahkan mencatat seluruh riwayat transaksi dan rating ke dalam sistem leaderboard.
+      
+      Dengan WS Order Bot, saya ingin membawa kesan bahwa berbisnis atau roleplay di komunitas Discord bisa terasa seperti menggunakan sistem pemesanan profesional ala dunia nyata. Ini bukan sekadar bot, ini adalah infrastruktur digital yang menunjang kredibilitas, kecepatan, dan kenyamanan dalam satu paket utuh..</p>
+  
+    <ul>
+      <li>Form order interaktif langsung dari Discord menggunakan embed dan tombol.</li>
+      <li>Opsi layanan yang terstruktur berdasarkan kategori (Engine, Boost, Body, dll).</li>
+      <li>Sistem pemilihan layanan tanpa perlu mengetik manual (click-based order).</li>
+      <li>Channel order otomatis dibuat khusus untuk pelanggan dan mekanik, tidak bisa dilihat publik.</li>
+      <li>Status order real-time (Diterima, Dibatalkan, Kadaluarsa).</li>
+      <li>Order kadaluarsa otomatis jika tidak ada aksi dalam 3 menit.</li>
+      <li>Estimasi waktu pengerjaan bisa dipilih oleh mekanik dari daftar waktu yang sudah disediakan.</li>
+      <li>Pelanggan dapat memberikan rating setelah order selesai.</li>
+      <li>Leaderboard mekanik terbaik berdasarkan rating harian, mingguan, dan bulanan.</li>
+      <li>Riwayat transaksi dan data order dicatat otomatis ke database.</li>
+    </ul>
+    
+      
+    <button id="music-control">Pause Musik</button>
+
+ 
+    <audio id="background-music" loop autoplay>
+      <source src="sound.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  
+    <script>
+     
+      const musicControl = document.getElementById('music-control');
+      const bgMusic = document.getElementById('bg-music');
+  
+      musicControl.addEventListener('click', () => {
+        if (bgMusic.paused) {
+          bgMusic.play();
+          musicControl.textContent = 'Pause Musik';
+        } else {
+          bgMusic.pause();
+          musicControl.textContent = 'Play Musik';
+        }
+      });
+    </script>
+
+
+    <a href="project.html" class="back-btn">← Kembali ke Project</a>
+  </div>
+  
+  </div>
+
+</body>
+</html>

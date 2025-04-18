@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bot Discord Bengkel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .image-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.preview-img {
+  max-width: 100%;
+  width: 300px; /* atau 100% biar adaptif */
+  height: auto;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.preview-img:hover {
+  transform: scale(1.03);
+}
+
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #FFD700;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #e6c200;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="image-group">
+      <a href="vbotname.png" target="_blank">
+        <img src="vbotname.png" alt="Bot Bengkel Preview" class="preview-img">
+      </a>
+      <a href="zbotname.png" target="_blank">
+        <img src="zbotname.png" alt="Bot Bengkel Preview" class="preview-img">
+      </a>
+    </div>
+  
+    <h1>Bot change name </h1>
+  
+    <p>Bot Change Name adalah bot yang saya kembangkan khusus untuk komunitas SAMP (San Andreas Multiplayer), terutama dalam konteks bisnis Workshop (WS). Tujuan dari bot ini adalah untuk memberikan kebebasan kepada semua member di server Discord agar bisa mengubah nama mereka sendiri secara otomatis, tanpa perlu role admin atau moderator.
+
+      Bot ini dibuat agar semua anggota baik pelanggan, mekanik, hingga GM—bisa mengatur nama mereka sendiri sesuai keperluan IC (In Character), tetapi tetap menjaga struktur jabatan atau posisi seperti CEO, Manager, Staff, Mekanik, dan sebagainya.
+      
+      Nama yang diganti tetap akan otomatis menggunakan format jabatan di depan nama, yang terkunci dan tidak bisa diubah oleh member. Misalnya:
+      [CEO] Jonathan → diganti jadi Jonathan Nova, maka bot akan ubah otomatis menjadi:
+      [CEO] Jonathan Nova
+      Jadi, meskipun bebas ganti nama, jabatan tetap terjaga sesuai role di server.
+      
+      </p>
+  
+      <ul>
+        <li>Ganti nama otomatis lewat tombol di embed Discord tanpa perlu izin admin atau moderator.</li>
+        <li>Jabatan atau role-title seperti [CEO], [Mekanik], dll otomatis ditambahkan di depan nama dan tidak bisa diubah oleh user.</li>
+        <li>Format nama selalu konsisten dan menjaga kerapihan struktur jabatan di server.</li>
+        <li>Tampilan interaktif menggunakan embed dan button yang mudah digunakan oleh semua member.</li>
+        <li>Proses perubahan nama cepat, real-time, dan user-friendly.</li>
+        <li>Mengurangi beban admin dan moderator dalam menangani permintaan ganti nama.</li>
+        <li>Cocok untuk komunitas roleplay, bisnis IC, organisasi, dan server dengan sistem jabatan terstruktur.</li>
+      </ul>
+      
+      
+    <a href="project.html" class="back-btn">← Kembali ke Project</a>
+  </div>
+  
+  </div>
+
+  <button id="music-control">Pause Musik</button>
+
+ 
+  <audio id="background-music" loop autoplay>
+    <source src="sound.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+   
+    const musicControl = document.getElementById('music-control');
+    const bgMusic = document.getElementById('bg-music');
+
+    musicControl.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicControl.textContent = 'Pause Musik';
+      } else {
+        bgMusic.pause();
+        musicControl.textContent = 'Play Musik';
+      }
+    });
+  </script>
+
+</body>
+</html>

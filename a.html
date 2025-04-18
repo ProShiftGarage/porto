@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio [Nama Kamu]</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #222;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    nav {
+      background-color: #111;
+      padding: 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #444;
+    }
+
+    .project {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 5px solid #007bff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #222;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-kuning {
+  background-color: #FFD700; /* Warna kuning */
+  color: #000; /* Teks hitam */
+  border: none; /* Hilangkan border */
+  padding: 10px 20px; /* Ukuran tombol */
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 0; /* Sudut kotak, tidak membulat */
+  transition: background-color 0.3s;
+}
+
+.btn-kuning:hover {
+  background-color: #e6c200; /* Warna saat di-hover */
+}
+
+  </style>
+</head>
+
+<body>
+
+  <header data-aos="fade-down">
+    <h1>Huda</h1>
+    <p>Web Developer | Backend Developer | Software Developer</p>
+  </header>
+
+  <nav>
+    <a href="#about">Tentang</a>
+    <a href="#projects">Proyek</a>
+    <a href="#contact">Kontak</a>
+  </nav>
+
+  <section id="about" data-aos="fade-up">
+    <h2>Tentang Saya</h2>
+    <p>Saya adalah seorang developer muda berusia 17 tahun yang aktif dan serius dalam mengembangkan berbagai solusi
+      digital berbasis teknologi. Saya bekerja menggunakan beberapa bahasa pemrograman seperti Python, JavaScript,
+      CSS, dan lainya, dengan tingkat penguasaan yang mendalam terutama di Python. Fokus utama saya saat ini adalah
+      mengembangkan bot Discord custom yang dapat disesuaikan sepenuhnya dengan kebutuhan klien baik itu untuk
+      komunitas, server bisnis, personal tools, maupun integrasi dengan sistem lain.
+
+    <P> Saya tidak hanya membuat bot yang fungsional, tapi juga memastikan bahwa setiap fitur yang dikembangkan mudah
+      digunakan, efisien, dan sesuai dengan skenario penggunaannya. Mulai dari sistem otomatisasi, database terhubung,
+      logika custom, panel admin, verifikasi, hingga sistem order dan tracking, semuanya bisa saya kerjakan dengan
+      pendekatan yang rapi dan terstruktur.</P>
+
+    <P> Di luar pengembangan bot, saya juga terus memperluas keahlian saya di bidang pengelolaan database dan web
+      development agar sistem yang saya bangun memiliki fondasi yang kuat dan skalabilitas tinggi. Saya memahami bahwa
+      setiap proyek memiliki karakteristik dan kebutuhan unik, itulah sebabnya saya terbiasa berkomunikasi secara detail
+      dengan klien agar hasil akhir benar-benar sesuai harapan.</P>
+
+    <P> Saya terbuka untuk berbagai jenis proyek baik dari kalangan personal, komunitas, hingga pelaku bisnis dan selalu
+      berkomitmen untuk memberikan layanan yang profesional, responsif, serta dapat dipercaya.</P>
+
+    <P> Jika Anda membutuhkan solusi digital yang fleksibel, custom, dan siap pakai, saya siap membantu Anda dari awal
+      sampai akhir. Mari kita bicarakan ide Anda, dan saya akan bantu wujudkan menjadi kenyataan lewat sistem yang solid
+      dan dapat diandalkan.</P>
+  </section>
+
+  <section id="projects" data-aos="fade-up">
+    <h2>Project Saya</h2>
+    <div class="project">
+        <h3>project</h3>
+        <p>project saya sebagian disini.</p>
+        
+        <!-- Tombol untuk melihat detail proyek atau melakukan tindakan lain -->
+        <a href="project.html" class="btn-kuning">Lihat Project</a>
+
+
+    </div>
+</section>
+
+
+
+  <section id="contact" data-aos="fade-up">
+    <h2>Kontak Saya</h2>
+    <p>Email:hudah0999@gmail.com</p>
+    <p>Instagram: <a href="https://instagram.com/huda_ogg" target="_blank">@huda_ogg</a></p>
+  </section>
+
+  <footer>
+    &copy; 17-04-2025 rilis
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <button id="music-control">Pause Musik</button>
+
+ 
+  <audio id="background-music" loop autoplay>
+    <source src="sound.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+   
+    const musicControl = document.getElementById('music-control');
+    const bgMusic = document.getElementById('bg-music');
+
+    musicControl.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicControl.textContent = 'Pause Musik';
+      } else {
+        bgMusic.pause();
+        musicControl.textContent = 'Play Musik';
+      }
+    });
+  </script>
+
+</body>
+
+</html>

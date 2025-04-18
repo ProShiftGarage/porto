@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aim Trainer Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #game-container {
+      position: relative;
+      width: 90vw;
+      max-width: 700px;
+      height: 500px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .target {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: #ff3c3c;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    #scoreboard {
+      margin-top: 20px;
+      text-align: center;
+    }
+    #start-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      background-color: #00d084;
+      color: white;
+      cursor: pointer;
+    }
+    #start-btn:hover {
+      background-color: #00a66c;
+    }
+    #leaderboard {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      width: 100%;
+    }
+    .leaderboard-category {
+      text-align: center;
+    }
+    .leaderboard-category h3 {
+      margin-bottom: 10px;
+    }
+    .leaderboard-category p {
+      margin: 0;
+    }
+    #name-input-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+    #name-input {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+    }
+    #submit-name {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #ff3c3c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+    }
+    #submit-name:hover {
+      background-color: #e52a2a;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aim Trainer Game</h1>
+  
+  <!-- Input for name -->
+  <div id="name-input-container">
+    <input type="text" id="name-input" placeholder="Masukkan Nama" />
+    <button id="submit-name">Masukkan Nama</button>
+    <p id="error-message" style="color: red;"></p>
+  </div>
+
+  <div id="game-container"></div>
+  
+  <div id="scoreboard">
+    <p>Waktu Tersisa: <span id="time">30</span> detik</p>
+    <p>Skor: <span id="score">0</span></p>
+    <button id="start-btn">Mulai Main</button>
+  </div>
+
+  <div id="leaderboard">
+    <div class="leaderboard-category" id="pc-leaderboard">
+      <h3>PC Leaderboard</h3>
+      <div id="pc-top-scores">
+        <p>No data yet...</p>
+      </div>
+    </div>
+    <div class="leaderboard-category" id="hp-leaderboard">
+      <h3>HP Leaderboard</h3>
+      <div id="hp-top-scores">
+        <p>No data yet...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const gameContainer = document.getElementById("game-container");
+    const scoreDisplay = document.getElementById("score");
+    const timeDisplay = document.getElementById("time");
+    const startBtn = document.getElementById("start-btn");
+    const pcLeaderboard = document.getElementById("pc-top-scores");
+    const hpLeaderboard = document.getElementById("hp-top-scores");
+    const nameInput = document.getElementById("name-input");
+    const submitNameBtn = document.getElementById("submit-name");
+    const errorMessage = document.getElementById("error-message");
+
+    let score = 0;
+    let timeLeft = 30;
+    let gameInterval, targetTimeout;
+    let topScoresPC = [];
+    let topScoresHP = [];
+    let isPC = false;
+    let playerName = '';
+    const namesTaken = { pc: [], hp: [] };  // Object to track taken names for PC and HP
+
+    function detectDevice() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      if (userAgent.includes("android") || userAgent.includes("iphone")) {
+        isPC = false;  // Device is mobile
+      } else {
+        isPC = true;  // Device is PC
+      }
+    }
+
+    function createTarget() {
+      const target = document.createElement("div");
+      target.classList.add("target");
+
+      const maxX = gameContainer.clientWidth - 50;
+      const maxY = gameContainer.clientHeight - 50;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      target.style.left = `${x}px`;
+      target.style.top = `${y}px`;
+
+      target.addEventListener("click", () => {
+        score++;
+        scoreDisplay.textContent = score;
+        target.remove();
+        clearTimeout(targetTimeout);
+        spawnTarget();
+      });
+
+      gameContainer.appendChild(target);
+
+      targetTimeout = setTimeout(() => {
+        if (target.parentNode) target.remove();
+        spawnTarget();
+      }, 1500);
+    }
+
+    function spawnTarget() {
+      if (timeLeft > 0) {
+        createTarget();
+      }
+    }
+
+    function updateLeaderboard() {
+      const newScore = { name: playerName, score: score };
+      if (isPC) {
+        topScoresPC.push(newScore);
+        topScoresPC.sort((a, b) => b.score - a.score);  // Sort descending
+        topScoresPC = topScoresPC.slice(0, 5);  // Keep top 5
+        displayLeaderboard('pc');
+      } else {
+        topScoresHP.push(newScore);
+        topScoresHP.sort((a, b) => b.score - a.score);  // Sort descending
+        topScoresHP = topScoresHP.slice(0, 5);  // Keep top 5
+        displayLeaderboard('hp');
+      }
+    }
+
+    function displayLeaderboard(device) {
+      const leaderboard = device === 'pc' ? topScoresPC : topScoresHP;
+      const leaderboardDiv = device === 'pc' ? pcLeaderboard : hpLeaderboard;
+      leaderboardDiv.innerHTML = '';
+      if (leaderboard.length === 0) {
+        leaderboardDiv.innerHTML = '<p>No data yet...</p>';
+      } else {
+        leaderboard.forEach(entry => {
+          leaderboardDiv.innerHTML += `<p>${entry.name}: ${entry.score}</p>`;
+        });
+      }
+    }
+
+    function startGame() {
+      score = 0;
+      timeLeft = 30;
+      scoreDisplay.textContent = score;
+      timeDisplay.textContent = timeLeft;
+      gameContainer.innerHTML = "";
+      spawnTarget();
+
+      detectDevice();  // Detect device when game starts
+
+      clearInterval(gameInterval);
+      gameInterval = setInterval(() => {
+        timeLeft--;
+        timeDisplay.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(gameInterval);
+          updateLeaderboard();  // Update leaderboard after game ends
+          gameContainer.innerHTML = "<h2 style='text-align:center;'>Game Over! Skor Akhir: " + score + "</h2>";
+        }
+      }, 1000);
+    }
+
+    function handleNameInput() {
+      const name = nameInput.value.trim();
+      if (name === '') {
+        errorMessage.textContent = "Nama tidak boleh kosong!";
+        return;
+      }
+      
+      const takenNames = isPC ? namesTaken.pc : namesTaken.hp;
+      if (takenNames.includes(name)) {
+        errorMessage.textContent = "Nama sudah digunakan, pilih nama lain!";
+        return;
+      }
+
+      playerName = name;
+      takenNames.push(playerName);
+      errorMessage.textContent = "";
+      document.getElementById("name-input-container").style.display = 'none'; // Hide input form
+      startBtn.style.display = 'inline-block'; // Show start button
+    }
+
+    submitNameBtn.addEventListener("click", handleNameInput);
+
+    startBtn.addEventListener("click", startGame);
+  </script>
+
+<button id="music-control">Pause Musik</button>
+
+ 
+  <audio id="background-music" loop autoplay>
+    <source src="sound.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+   
+    const musicControl = document.getElementById('music-control');
+    const bgMusic = document.getElementById('bg-music');
+
+    musicControl.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicControl.textContent = 'Pause Musik';
+      } else {
+        bgMusic.pause();
+        musicControl.textContent = 'Play Musik';
+      }
+    });
+  </script>
+
+</body>
+</html>
